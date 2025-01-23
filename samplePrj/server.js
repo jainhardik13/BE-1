@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
     if (req.method == 'GET') {
         switch (req.url) {
             case '/': {
-                fs.readFile(path.join(__dirname, 'public','index.html'), 'utf-8', (err, data) => {
+                fs.readFile(path.join(__dirname, 'login.html'), 'utf-8', (err, data) => {
                     if (err) {
                         res.writeHead(500, { 'Content-Type': 'text/plain' })
                         res.end('Error reading the login page')
@@ -20,11 +20,23 @@ const server = http.createServer((req, res) => {
                 })
                 break
             }
-            case '/login': {
-                fs.readFile(path.join(__dirname, 'login.html'), 'utf-8', (err, data) => {
+            case '/dashboard': {
+                fs.readFile(path.join(__dirname, 'dashboard.html'), 'utf-8', (err, data) => {
                     if (err) {
                         res.writeHead(500, { 'Content-Type': 'text/plain' })
                         res.end('Error reading the dashboard page')
+                        return
+                    }
+                    res.writeHead(200, { 'Content-Type': 'text/html' })
+                    res.end(data)
+                })
+                break
+            }
+            case '/register': {
+                fs.readFile(path.join(__dirname, 'register.html'), 'utf-8', (err, data) => {
+                    if (err) {
+                        res.writeHead(500, { 'Content-Type': 'text/plain' })
+                        res.end('Error reading the registration page')
                         return
                     }
                     res.writeHead(200, { 'Content-Type': 'text/html' })
